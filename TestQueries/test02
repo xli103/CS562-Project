@@ -1,0 +1,14 @@
+SELECT ATTRIBUTE(S)
+cust, prod, quant
+NUMBER OF GROUPING VARIABLES(n):
+3
+GROUPING ATTRIBUTES(V):
+cust, prod
+F-VECT([F]):
+1_avg_prod, 2_avg_prod, 3_avg_prod
+SELECT CONDITION-VECT([sigma]):
+1.state = 'NY' and 2.state = 'NJ' and 3.state = 'CT'
+HAVING CONDITION(G):
+1_avg_prod > 2_avg_prod and 1_avg_prod > 3_avg_prod 
+WHERE CONDITIONS:
+year = 1997

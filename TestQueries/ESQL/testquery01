@@ -1,0 +1,5 @@
+select cust, prod, quant
+from sales
+where year = 1997
+group by cust, month
+having prod > 500

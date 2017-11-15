@@ -1,0 +1,5 @@
+select cust, prod, month, avg(quant)
+from sales
+where year = 1997
+group by cust, prod: x, y
+such that sum(x.quant) > sum(y.quant) and avg(x.quant) < avg(y.quant)

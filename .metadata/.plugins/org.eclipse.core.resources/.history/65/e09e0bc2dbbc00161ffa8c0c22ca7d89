@@ -1,0 +1,18 @@
+package dcq.stevens.cs562.generator;
+
+import java.util.List;
+
+public class DCQFaiStruct {
+	//Fai operator S, store all projection attributes
+	private List<String> operator_S;
+	//Fai operator N, store the number of group variables
+	private Integer operator_N;
+	//Fai operator V, store grouping attributes
+	private List<String> operator_V;
+	//Fai operator F, store aggregation function list
+	private List<String> operator_F;
+	//Fai operator G, store having clause
+	private List<String> operator_G;
+	//Fai operator Theta, store conditions of grouping;
+	private List<String> operator_Theta;
+}

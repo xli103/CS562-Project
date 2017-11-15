@@ -1,0 +1,5 @@
+select x.cust, x,month, avg(x.quant)
+from sales
+where year = 1997
+group by cust : x, y
+having avg(x.quant) > avg(y.quant)

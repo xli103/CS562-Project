@@ -1,0 +1,72 @@
+package dcq.stevens.cs548.generator;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
+import dcq.stevens.cs562.datastructure.DCQConnDB;
+
+public class DCQprintFunctions {
+	
+	//store temp string for construct input java code
+	private List<String> tempJava = new ArrayList<String>();	
+	
+	//path of target file
+	private static final String TARGETFILE = null
+			;
+	//data type transfer from sql to java
+	public String transferType(String str){
+		switch(str){
+		case "sum":
+	 		return "		long ";
+	 	case "integer":
+	 		return "		int ";
+	 	case "character varying":
+	 		return "		String ";
+	 	case "character":
+	 		return "		char ";
+	 	default:
+	 		return "		int ";
+		}
+	}
+
+	//function to print strings
+	public void printString(String content){
+		try{
+			 FileWriter fw = new FileWriter(TARGETFILE, true);
+			 BufferedWriter bw = new BufferedWriter(fw);
+			 bw.write(content+"\r\n");
+			 bw.close();
+		 } catch(Exception e) {
+			 System.out.print("Fail to write");
+		 }
+	}
+	
+	//get data type from database
+	public List<String> getType(List<String> attribute){
+		List<String> temp = new ArrayList<String>();
+		try{
+			DCQConnDB conn = new DCQConnDB();
+			Connection ct = conn.getConn();
+			PreparedStatement ps = ct.prepareStatement("select * "
+					+ "from Information_schema.columns where table_name = 'sales'");
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()){
+				for(String attr : attribute){
+					if(rs.getString("column_name").equals(attribute)){
+						temp.add(transferType(rs.getString("data_type") + attr + ";"));
+						tempJava.add(attr + (transferType(rs.getString("data_type")).equals("\t\tString ") ? " = null" : " = 0") + ";");
+					}
+				}
+			}
+			conn.closeConn(ct, ps, rs);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return temp;
+	}
+}

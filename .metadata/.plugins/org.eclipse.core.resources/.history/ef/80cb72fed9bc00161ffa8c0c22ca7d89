@@ -1,0 +1,5 @@
+package dcq.stevens.cs562.generator;
+
+public class DCQFaiStruct {
+	private List<String> 
+}

@@ -1,0 +1,6 @@
+select cust, prod
+from sales
+where year = 1997
+group by cust, month: x, y, z
+such that x.state = 'NJ' and y.state = 'NY'
+having sum(x.quant) > sum(y.quant) and avg(x.quant) > avg(z.quant) and x.prod = y.prod and x.prod = z.prod
